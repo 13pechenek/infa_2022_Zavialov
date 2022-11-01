@@ -19,7 +19,7 @@ COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 def new_ball():
     '''рисует новый шарик '''
     global x,y,r
-    x = randint(100, 1100)
+    x = randint(100, 1000)
     y = randint(100, 900)
     r = randint(10, 100)
     X.append(x)
