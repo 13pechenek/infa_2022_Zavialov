@@ -1,7 +1,7 @@
-
 import pygame
 from pygame.draw import *
 from random import randint
+
 pygame.init()
 
 FPS = 0.5
@@ -16,18 +16,20 @@ CYAN = (0, 255, 255)
 BLACK = (0, 0, 0)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
 
-def new_ball(x,y,r,color):
+
+def new_ball(x, y, r, color):
     '''рисует новый шарик '''
     circle(screen, color, (x, y), r)
+
+
 def click(event):
-    o =False
-    s1=False
+    o = False
     for i in range(len(X)):
         if (event.pos[0]-X[i])**2+(event.pos[1]-Y[i])**2<R[i]**2:
-         o=True
-         if i==len(X)-1 and s==True:
-            s1 =True
-    return o,s1
+            o = True
+            if i == len(X) - 1 and s == True:
+                s1 = True
+    return o, s1
 
 pygame.display.update()
 clock = pygame.time.Clock()
