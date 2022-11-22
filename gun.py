@@ -157,8 +157,8 @@ class Target:
         self.x = choice([600, 780])
         self.y = choice([300, 550])
         self.r = choice([10, 50])
-        self.vx = choice([0,3])
-        self.vy = choice([0,3])
+        self.vx = choice([0, 3])
+        self.vy = choice([0, 3])
         self.color = RED
 
     def hit(self, points=1):
