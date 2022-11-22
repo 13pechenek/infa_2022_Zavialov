@@ -157,7 +157,7 @@ class Target:
         """ Инициализация новой цели. """
         self.x = choice([600, 780])
         self.y = choice([300, 550])
-        self.r = choice([2, 50])
+        self.r = choice([10, 50])
         self.color = RED
         self.live = 1
 
@@ -206,11 +206,13 @@ while not finished:
             gun.targetting(event)
 
     for b in BALLS:
-        b.move()
         if b.hittest(target):
             target.live = 0
             target.hit()
             target.new_target()
+            BALLS.remove(b)
+        b.move()
+        if b.y >= 600 - b.r and abs(b.vx) <= 0.001 and abs(b.vy) <= 0.001:
             BALLS.remove(b)
     gun.power_up()
 
