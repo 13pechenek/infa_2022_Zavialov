@@ -22,7 +22,7 @@ HEIGHT = 600
 
 
 class Ball:
-    def __init__(self, screen: pygame.Surface, x = 40, y = 450):
+    def __init__(self, screen: pygame.Surface, x=40, y=450):
         """ Конструктор класса ball
 
         Args:
@@ -33,29 +33,29 @@ class Ball:
         self.x = x
         self.y = y
         self.r = 10
-        self.vx = 0
-        self.vy = 0
+        self.vx = float(0)
+        self.vy = float(0)
         self.color = choice(GAME_COLORS)
         self.live = 30
 
     def move(self):
         """Переместить мяч по прошествии единицы времени.
 
-        Метод описывает перемещение мяча за один кадр перерисовки. То есть, обновляет значения
-        self.x и self.y с учетом скоростей self.vx и self.vy, силы гравитации, действующей на мяч,
+        Метод описывает перемещение мяча за один кадр перерисовки.
+        То есть, обновляет значения self.x и self.y с учетом скоростей
+        self.vx и self.vy, силы гравитации, действующей на мяч,
         и стен по краям окна (размер окна 800х600).
         """
         self.x += self.vx
         self.y -= self.vy
-        
-        self.vy -=2
-        if self.x +10 +self.vx >= WIDTH or self.x - 10 +self.vx <= 0:
+        self.vy -= 2
+        if self.x + 10 + self.vx >= WIDTH or self.x - 10 + self.vx <= 0:
             self.vx = -self.vx
-        if self.y -  self.vy +10 >= HEIGHT or self.y - self.vy  -10 <= 0:
-            if self.vy<=0 and self.vy>= -3:
-                self.vy=0
-            self.vy=-self.vy//5
-            self.vx*=0.8
+        if self.y - self.vy + 10 >= HEIGHT or self.y - self.vy - 10 <= 0:
+            if self.vy <= 0 and self.vy >= -3:
+                self.vy = 0
+            self.vy = -self.vy//5
+            self.vx *= 0.8
 
     def draw(self):
         pygame.draw.circle(
@@ -66,14 +66,16 @@ class Ball:
         )
 
     def hittest(self, obj):
-        """Функция проверяет сталкивалкивается ли данный обьект с целью, описываемой в обьекте obj.
+        """Функция проверяет сталкивалкивается ли данный обьект с целью,
+         описываемой в обьекте obj.
 
         Args:
             obj: Обьект, с которым проверяется столкновение.
         Returns:
-            Возвращает True в случае столкновения мяча и цели. В противном случае возвращает False.
+            Возвращает True в случае столкновения мяча и цели.
+            В противном случае возвращает False.
         """
-        if (self.r + obj.r)**2 >= (self.x - obj.x)**2 +(self.y -obj.y)**2:
+        if (self.r + obj.r)**2 >= (self.x - obj.x)**2 + (self.y - obj.y)**2:
             return True
         else:
             return False
@@ -94,15 +96,19 @@ class Gun:
         """Выстрел мячом.
 
         Происходит при отпускании кнопки мыши.
-        Начальные значения компонент скорости мяча vx и vy зависят от положения мыши.
+        Начальные значения компонент скорости мяча
+        vx и vy зависят от положения мыши.
         """
         global BALLS, BULLET
         BULLET += 1
         new_ball = Ball(self.screen)
         new_ball.r += 5
-        self.an = math.atan2((event.pos[1]-new_ball.y), (event.pos[0]-new_ball.x))
+        self.an = math.atan2(
+            (event.pos[1]-new_ball.y),
+            (event.pos[0]-new_ball.x)
+            )
         new_ball.vx = self.f2_power * math.cos(self.an)
-        new_ball.vy = - self.f2_power * math.sin(self.an)
+        new_ball.vy = -self.f2_power * math.sin(self.an)
         BALLS.append(new_ball)
         self.f2_on = 0
         self.f2_power = 10
@@ -116,7 +122,6 @@ class Gun:
         else:
             self.color = GREY
 
-
     def draw(self):
         """
             aaa
@@ -124,11 +129,12 @@ class Gun:
         pygame.draw.line(
             self.screen,
             self.color,
-            (20,450),
-            (math.cos(self.an)*self.f2_power+20, math.sin(self.an)*self.f2_power+450),
+            (20, 450),
+            (
+                math.cos(self.an)*self.f2_power + 20,
+                math.sin(self.an)*self.f2_power + 450),
             20
             )
-
 
     def power_up(self):
         """
@@ -163,7 +169,7 @@ class Target:
         pygame.draw.circle(
             screen,
             self.color,
-            (self.x,self.y),
+            (self.x, self.y),
             self.r
         )
 

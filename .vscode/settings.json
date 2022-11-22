@@ -3,5 +3,8 @@
         "."
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.linting.autopep8Enabled": true,
+    "python.linting.pylintEnabled": true
 }
